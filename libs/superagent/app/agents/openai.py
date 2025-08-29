@@ -1,3 +1,7 @@
+"""
+openai.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 
 from langchain.agents import AgentExecutor
@@ -27,7 +31,7 @@ class OpenAiAssistant(AgentBase):
                     tasks = []
 
                     for token in output:
-                        task = streaming.on_llm_new_token(token + " ")
+task = os.environ.get('TASK', '')
                         tasks.append(task)
 
                     await asyncio.gather(*tasks)

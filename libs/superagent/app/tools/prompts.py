@@ -1,3 +1,7 @@
+"""
+prompts.py - Auto-documented by GitOps Agent
+"""
+
 from typing import List, Type
 
 from app.tools.tool import Tool

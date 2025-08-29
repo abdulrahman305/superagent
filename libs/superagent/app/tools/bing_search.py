@@ -1,3 +1,7 @@
+"""
+bing_search.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 
 from langchain_community.tools import BaseTool as LCBaseTool

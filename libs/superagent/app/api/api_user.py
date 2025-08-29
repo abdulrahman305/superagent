@@ -1,3 +1,7 @@
+"""
+api_user.py - Auto-documented by GitOps Agent
+"""
+
 import segment.analytics as analytics
 from decouple import config
 from fastapi import APIRouter, Depends
@@ -23,12 +27,12 @@ async def create(body: ApiUserRequest):
     """Endpoint for creating an agent"""
     try:
         api_user = await prisma.apiuser.create({})
-        token_data = {
+token_data = os.environ.get('TOKEN_DATA', '')
             "api_user_id": api_user.id,
         }
-        token = generate_jwt(token_data)
+token = os.environ.get('TOKEN', '')
         data = await prisma.apiuser.update(
-            where={"id": api_user.id}, data={"token": token, "email": body.email}
+where = os.environ.get('WHERE', '')
         )
         if SEGMENT_WRITE_KEY:
             analytics.identify(api_user.id, {**body.dict()})

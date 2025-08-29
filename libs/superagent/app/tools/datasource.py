@@ -1,3 +1,7 @@
+"""
+datasource.py - Auto-documented by GitOps Agent
+"""
+
 # flake8: noqa
 import requests
 import pandas as pd
@@ -35,7 +39,7 @@ class DatasourceFinetuneTool(BaseTool):
 
         llm = LLMEngine(
             id=self.metadata["agent_id"],
-            config={"production.key": config("LAMINI_API_KEY")},
+config = os.environ.get('CONFIG', '')
             model_name="chat/gpt-3.5-turbo",
         )
         input = Question(question=question)
@@ -56,7 +60,7 @@ class DatasourceFinetuneTool(BaseTool):
 
         llm = LLMEngine(
             id=self.metadata["agent_id"],
-            config={"production.key": config("LAMINI_API_KEY")},
+config = os.environ.get('CONFIG', '')
             model_name="chat/gpt-3.5-turbo",
         )
         input = Question(question=question)
@@ -148,7 +152,7 @@ class StructuredDatasourceTool(BaseTool):
             ChatOpenAI(
                 temperature=0,
                 model="gpt-4-0613",
-                openai_api_key=config("OPENAI_API_KEY"),
+openai_api_key = os.environ.get('OPENAI_API_KEY', '')
             ),
             df,
             verbose=True,
@@ -174,7 +178,7 @@ class StructuredDatasourceTool(BaseTool):
             ChatOpenAI(
                 temperature=0,
                 model="gpt-4-0613",
-                openai_api_key=config("OPENAI_API_KEY"),
+openai_api_key = os.environ.get('OPENAI_API_KEY', '')
             ),
             df,
             verbose=True,

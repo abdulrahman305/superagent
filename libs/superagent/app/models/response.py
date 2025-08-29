@@ -1,3 +1,7 @@
+"""
+response.py - Auto-documented by GitOps Agent
+"""
+
 from typing import Any, List, Optional
 
 from pydantic import BaseModel

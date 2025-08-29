@@ -1,3 +1,7 @@
+"""
+saml_schema.py - Auto-documented by GitOps Agent
+"""
+
 # flake8: noqa
 from enum import Enum
 from typing import Any, Optional

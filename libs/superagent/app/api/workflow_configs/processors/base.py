@@ -1,3 +1,7 @@
+"""
+base.py - Auto-documented by GitOps Agent
+"""
+
 from abc import ABC, abstractmethod
 
 from app.api.workflow_configs.api.api_manager import ApiManager

@@ -1,3 +1,7 @@
+"""
+processor.py - Auto-documented by GitOps Agent
+"""
+
 from app.api.workflow_configs.api.api_manager import ApiManager
 from app.api.workflow_configs.processors.base import BaseProcessor
 from prisma.enums import AgentType

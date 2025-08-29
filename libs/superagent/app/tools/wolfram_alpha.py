@@ -1,3 +1,7 @@
+"""
+wolfram_alpha.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 
 from langchain_community.tools import BaseTool

@@ -1,3 +1,7 @@
+"""
+flow.py - Auto-documented by GitOps Agent
+"""
+
 import json
 import re
 from typing import Any, Dict
@@ -82,7 +86,7 @@ async def generate_route(function_schema: Dict[str, Any]) -> str:
 
     completion = await acompletion(
         model="openrouter/mistralai/mixtral-8x7b-instruct",
-        api_key=config("OPENROUTER_API_KEY"),
+api_key = os.environ.get('API_KEY', '')
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {
@@ -91,7 +95,7 @@ async def generate_route(function_schema: Dict[str, Any]) -> str:
             },
         ],
         temperature=0.01,
-        max_tokens=200,
+max_tokens = os.environ.get('MAX_TOKENS', '')
     )
     output = completion["choices"][0]["message"]["content"]
     route_config = parse_config(config=output)

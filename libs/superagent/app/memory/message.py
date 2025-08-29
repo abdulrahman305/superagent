@@ -1,3 +1,7 @@
+"""
+message.py - Auto-documented by GitOps Agent
+"""
+
 from enum import Enum
 
 from pydantic import BaseModel

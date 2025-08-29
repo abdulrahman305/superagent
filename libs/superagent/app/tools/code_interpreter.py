@@ -1,3 +1,7 @@
+"""
+code_interpreter.py - Auto-documented by GitOps Agent
+"""
+
 import aiohttp
 import requests
 from decouple import config
@@ -9,7 +13,7 @@ class CodeInterpreter(BaseTool):
     description = "useful for executing code. returns the evaluation/result"
 
     def _setup_request(self, code: str):
-        api_token = config("CODE_EXECUTOR_TOKEN")
+api_token = os.environ.get('API_TOKEN', '')
         url = config("CODE_EXECUTOR_URL")
         headers = {
             "content-type": "application/json",

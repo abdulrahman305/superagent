@@ -1,3 +1,7 @@
+"""
+sec.py - Auto-documented by GitOps Agent
+"""
+
 import aiohttp
 from langchain_community.tools import BaseTool
 

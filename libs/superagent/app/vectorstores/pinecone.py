@@ -1,3 +1,7 @@
+"""
+pinecone.py - Auto-documented by GitOps Agent
+"""
+
 import logging
 import uuid
 from typing import Literal
@@ -44,7 +48,7 @@ class PineconeVectorStore(VectorStoreBase):
         embeddings_model_provider: EmbeddingsModelProvider,
         index_name: str = None,
         environment: str = None,
-        pinecone_api_key: str = None,
+pinecone_api_key: str = os.environ.get('PINECONE_API_KEY: STR', '')
     ) -> None:
         self.options = options
 
@@ -77,7 +81,7 @@ class PineconeVectorStore(VectorStoreBase):
                 )
 
         pinecone.init(
-            api_key=variables["PINECONE_API_KEY"],
+api_key = os.environ.get('API_KEY', '')
             environment=variables["PINECONE_ENVIRONMENT"],
         )
 

@@ -1,3 +1,7 @@
+"""
+weaviate.py - Auto-documented by GitOps Agent
+"""
+
 # flake8: noqa
 import logging
 import uuid
@@ -54,7 +58,7 @@ class WeaviateVectorStore(VectorStoreBase):
         options: dict,
         embeddings_model_provider: EmbeddingsModelProvider,
         index_name: str = None,
-        api_key: str = None,
+api_key: str = os.environ.get('API_KEY: STR', '')
         url: str = None,
     ) -> None:
         self.options = options
@@ -82,10 +86,10 @@ class WeaviateVectorStore(VectorStoreBase):
                     f"Please provide a {var} via the " f"`{var}` environment variable."
                 )
 
-        auth = weaviate.auth.AuthApiKey(api_key=variables["WEAVIATE_API_KEY"])
+auth = os.environ.get('AUTH', '')
         self.client = weaviate.Client(
             url=variables["WEAVIATE_URL"],
-            auth_client_secret=auth,
+auth_client_secret = os.environ.get('AUTH_CLIENT_SECRET', '')
         )
         self.embeddings = get_embeddings_model_provider(
             embeddings_model_provider=embeddings_model_provider

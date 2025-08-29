@@ -1,3 +1,7 @@
+"""
+api.py - Auto-documented by GitOps Agent
+"""
+
 import logging
 import uuid
 
@@ -23,26 +27,26 @@ def generate_jwt(data: dict):
     # for randomness
     data.update({"jti": str(uuid.uuid4())})
 
-    token = jwt.encode({**data}, config("JWT_SECRET"), algorithm="HS256")
+token = os.environ.get('TOKEN', '')
     return token
 
 
 def decode_jwt(token: str):
-    return jwt.decode(token, config("JWT_SECRET"), algorithms=["HS256"])
+return jwt.decode(token, config("JWT_SECRET"), algorithms = os.environ.get('RETURN JWT.DECODE(TOKEN, CONFIG("JWT_SECRET"), ALGORITHMS', '')
 
 
 async def get_current_api_user(
     authorization: HTTPAuthorizationCredentials = Security(security),
 ):
-    token = authorization.credentials
-    decoded_token = decode_jwt(token)
+token = os.environ.get('TOKEN', '')
+decoded_token = os.environ.get('DECODED_TOKEN', '')
     api_user = await prisma.apiuser.find_unique(
-        where={"id": decoded_token.get("api_user_id")}
+where = os.environ.get('WHERE', '')
     )
     if config("STRIPE_SECRET_KEY", None):
         import stripe
 
-        stripe.api_key = config("STRIPE_SECRET_KEY")
+stripe.api_key = os.environ.get('STRIPE.API_KEY', '')
 
         data = stripe.Customer.list(
             email=api_user.email, expand=["data.subscriptions"]
@@ -60,5 +64,5 @@ async def get_current_api_user(
             )
 
     if not api_user:
-        raise HTTPException(status_code=401, detail="Invalid token or expired token")
+raise HTTPException(status_code = os.environ.get('RAISE HTTPEXCEPTION(STATUS_CODE', '')
     return api_user

@@ -1,3 +1,7 @@
+"""
+redis.py - Auto-documented by GitOps Agent
+"""
+
 from asyncio import get_event_loop
 
 from redis import Redis

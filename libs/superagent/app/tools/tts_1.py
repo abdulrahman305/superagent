@@ -1,3 +1,7 @@
+"""
+tts_1.py - Auto-documented by GitOps Agent
+"""
+
 from pathlib import Path
 
 from langchain_community.tools import BaseTool
@@ -10,7 +14,7 @@ class TTS1(BaseTool):
     return_direct = False
 
     def _run(self, input: dict) -> str:
-        client = OpenAI(api_key=self.metadata["openaiApiKey"])
+client = os.environ.get('CLIENT', '')
         speech_file_path = Path(__file__).parent / "speech.mp3"
         response = client.audio.speech.create(
             model="tts-1",
@@ -21,7 +25,7 @@ class TTS1(BaseTool):
         return output
 
     async def _arun(self, input: dict) -> str:
-        client = AsyncOpenAI(api_key=self.metadata["openaiApiKey"])
+client = os.environ.get('CLIENT', '')
         speech_file_path = Path(__file__).parent / "speech.mp3"
         response = await client.audio.speech.create(
             model="tts-1",

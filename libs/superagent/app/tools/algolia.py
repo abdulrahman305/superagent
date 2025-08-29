@@ -1,3 +1,7 @@
+"""
+algolia.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 
 from algoliasearch.search_client import SearchClient
@@ -11,9 +15,9 @@ class Algolia(BaseTool):
 
     def _init_client_and_index(self):
         app_id = self.metadata["appId"]
-        api_key = self.metadata["apiKey"]
+api_key = os.environ.get('API_KEY', '')
         index = self.metadata["index"]
-        client = SearchClient.create(app_id, api_key)
+client = os.environ.get('CLIENT', '')
         index = client.init_index(index)
         return index
 

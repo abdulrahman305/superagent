@@ -1,3 +1,7 @@
+"""
+types.py - Auto-documented by GitOps Agent
+"""
+
 VALID_UNSTRUCTURED_DATA_TYPES = [
     "TXT",
     "PDF",

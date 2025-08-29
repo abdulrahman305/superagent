@@ -1,3 +1,7 @@
+"""
+llm.py - Auto-documented by GitOps Agent
+"""
+
 from litellm import get_llm_provider as litellm_get_llm_provider
 
 LLM_MAPPING = {

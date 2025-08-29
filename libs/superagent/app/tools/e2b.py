@@ -1,3 +1,7 @@
+"""
+e2b.py - Auto-documented by GitOps Agent
+"""
+
 # flake8: noqa
 import ast
 from typing import Optional
@@ -39,7 +43,7 @@ class E2BCodeExecutor(BaseTool):
         code = self._add_last_line_print(python_code)
 
         # E2B session represents a sandbox runtime for LLM - it's a microVM for every instance of an agent.
-        session = DataAnalysis(api_key=config("E2B_API_KEY"))
+session = os.environ.get('SESSION', '')
 
         # E2B offers both streaming output and artifacts or retrieving them after the code has finished running.
         stdout, err, artifacts = session.run_python(

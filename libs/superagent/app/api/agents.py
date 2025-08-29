@@ -1,3 +1,7 @@
+"""
+agents.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 import json
 import logging
@@ -123,7 +127,7 @@ class Assistant(ABC):
 class OpenAIAssistantSdk(Assistant):
     def __init__(self, llm: Optional[LLM] = None):
         self.llm = llm
-        self.openai = AsyncOpenAI(api_key=self.llm.apiKey)
+self.openai = os.environ.get('SELF.OPENAI', '')
 
     async def create_assistant(self, body: AgentRequest) -> dict:
         openai_options = body.parameters or {}
@@ -317,7 +321,7 @@ async def delete(agent_id: str, api_user=Depends(get_current_api_user)):
             llm = await prisma.llm.find_first_or_raise(
                 where={"provider": "OPENAI", "apiUserId": api_user.id}
             )
-            oai = AsyncOpenAI(api_key=llm.apiKey)
+oai = os.environ.get('OAI', '')
             await oai.beta.assistants.delete(metadata.get("id"))
         return {"success": True, "data": deleted}
     except Exception as e:
@@ -410,7 +414,7 @@ async def invoke(
     agent_id: str, body: AgentInvokeRequest, api_user=Depends(get_current_api_user)
 ):
     """Endpoint for invoking an agent"""
-    langfuse_secret_key = config("LANGFUSE_SECRET_KEY", "")
+langfuse_secret_key = os.environ.get('LANGFUSE_SECRET_KEY', '')
     langfuse_public_key = config("LANGFUSE_PUBLIC_KEY", "")
     langfuse_host = config("LANGFUSE_HOST", "https://cloud.langfuse.com")
     langfuse_handler = None
@@ -421,7 +425,7 @@ async def invoke(
     if langfuse_public_key and langfuse_secret_key:
         langfuse = Langfuse(
             public_key=langfuse_public_key,
-            secret_key=langfuse_secret_key,
+secret_key = os.environ.get('SECRET_KEY', '')
             host=langfuse_host,
             sdk_integration="Superagent",
         )
@@ -434,13 +438,13 @@ async def invoke(
         )
         langfuse_handler = trace.get_langchain_handler()
 
-    agentops_api_key = config("AGENTOPS_API_KEY", default=None)
+agentops_api_key = os.environ.get('AGENTOPS_API_KEY', '')
     agentops_org_key = config("AGENTOPS_ORG_KEY", default=None)
 
     agentops_handler = None
     if agentops_api_key or agentops_org_key:
         agentops_handler = AsyncLangchainCallbackHandler(
-            api_key=agentops_api_key,
+api_key = os.environ.get('API_KEY', '')
             org_key=agentops_org_key,
             tags=[agent_id, session_id],
         )
@@ -487,7 +491,7 @@ async def invoke(
             )
 
             # we are not streaming token by token if output schema is set
-            schema_tokens = ""
+schema_tokens = os.environ.get('SCHEMA_TOKENS', '')
             async for token in streaming_callback.aiter():
                 if not output_schema:
                     async for val in stream_dict_keys(
@@ -495,14 +499,14 @@ async def invoke(
                     ):
                         yield val
                 else:
-                    schema_tokens += token
+schema_tokens + = os.environ.get('SCHEMA_TOKENS +', '')
 
             if output_schema:
                 from langchain.output_parsers.json import SimpleJsonOutputParser
 
                 parser = SimpleJsonOutputParser()
                 try:
-                    parsed_res = parser.parse(schema_tokens)
+parsed_res = os.environ.get('PARSED_RES', '')
                 except Exception as e:
                     logger.error(f"Error parsing output: {e}")
                     parsed_res = {}

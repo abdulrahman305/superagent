@@ -1,3 +1,7 @@
+"""
+helpers.py - Auto-documented by GitOps Agent
+"""
+
 import logging
 
 import requests

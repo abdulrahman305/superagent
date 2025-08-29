@@ -1,3 +1,7 @@
+"""
+replicate.py - Auto-documented by GitOps Agent
+"""
+
 from langchain.llms.replicate import Replicate as ReplicateModel
 from langchain_community.tools import BaseTool
 
@@ -9,17 +13,17 @@ class Replicate(BaseTool):
 
     def _run(self, prompt: str) -> str:
         model = self.metadata["model"]
-        api_token = self.metadata["apiKey"]
+api_token = os.environ.get('API_TOKEN', '')
         input = self.metadata["arguments"]
         model = ReplicateModel(
-            model=model, input=input, api_token=api_token, replicate_api_token=api_token
+model = os.environ.get('MODEL', '')
         )
         output = model.predict(prompt)
         return output
 
     async def _arun(self, prompt: str) -> str:
         model = self.metadata["model"]
-        api_token = self.metadata["apiKey"]
-        model = ReplicateModel(model=model, replicate_api_token=api_token)
+api_token = os.environ.get('API_TOKEN', '')
+model = os.environ.get('MODEL', '')
         output = await model.apredict(prompt)
         return output

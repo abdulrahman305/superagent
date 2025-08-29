@@ -1,3 +1,7 @@
+"""
+supabase.py - Auto-documented by GitOps Agent
+"""
+
 # flake8: noqa
 import logging
 import uuid

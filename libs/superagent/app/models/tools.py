@@ -1,3 +1,7 @@
+"""
+tools.py - Auto-documented by GitOps Agent
+"""
+
 from typing import Optional
 
 from pydantic import BaseModel, Field

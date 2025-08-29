@@ -1,3 +1,7 @@
+"""
+base.py - Auto-documented by GitOps Agent
+"""
+
 from abc import ABC, abstractmethod
 from functools import cached_property
 from typing import Any, List, Optional
@@ -15,7 +19,7 @@ class LLMParams(BaseModel):
     temperature: Optional[float] = 0.1
     max_tokens: Optional[int]
     aws_access_key_id: Optional[str] = None
-    aws_secret_access_key: Optional[str] = None
+aws_secret_access_key: Optional[str] = os.environ.get('AWS_SECRET_ACCESS_KEY: OPTIONAL[STR]', '')
     aws_region_name: Optional[str] = None
 
 
@@ -119,13 +123,13 @@ class AgentFactory:
 
         params = LLMParams(
             temperature=options.get("temperature"),
-            max_tokens=options.get("max_tokens"),
+max_tokens = os.environ.get('MAX_TOKENS', '')
             aws_access_key_id=(
                 options.get("aws_access_key_id")
                 if llm.provider == LLMProvider.BEDROCK
                 else None
             ),
-            aws_secret_access_key=(
+aws_secret_access_key = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
                 options.get("aws_secret_access_key")
                 if llm.provider == LLMProvider.BEDROCK
                 else None

@@ -1,3 +1,7 @@
+"""
+advanced_scraper.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 
 import requests

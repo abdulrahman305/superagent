@@ -1,3 +1,7 @@
+"""
+superagent.py - Auto-documented by GitOps Agent
+"""
+
 import logging
 from itertools import zip_longest
 

@@ -1,3 +1,7 @@
+"""
+api_manager.py - Auto-documented by GitOps Agent
+"""
+
 # flake8: noqa
 import logging
 

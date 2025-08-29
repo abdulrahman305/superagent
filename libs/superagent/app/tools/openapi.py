@@ -1,3 +1,7 @@
+"""
+openapi.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 import json
 

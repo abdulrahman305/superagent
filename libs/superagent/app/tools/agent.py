@@ -1,3 +1,7 @@
+"""
+agent.py - Auto-documented by GitOps Agent
+"""
+
 from decouple import config
 from langchain_community.tools import BaseTool
 

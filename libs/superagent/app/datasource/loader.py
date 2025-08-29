@@ -1,3 +1,7 @@
+"""
+loader.py - Auto-documented by GitOps Agent
+"""
+
 import json
 import tempfile
 from tempfile import NamedTemporaryFile
@@ -160,16 +164,16 @@ class DataLoader:
 
     def load_airtable(self):
         metadata = json.loads(self.datasource.metadata)
-        api_key = metadata["apiKey"]
+api_key = os.environ.get('API_KEY', '')
         base_id = metadata["baseId"]
         table_id = metadata["tableId"]
-        api = Api(api_key)
+api = os.environ.get('API', '')
         table = api.table(base_id, table_id)
         return table.all()
 
     def load_stripe(self):
         metadata = json.loads(self.datasource.metadata)
-        client_secret = metadata["clientSecret"]
+client_secret = os.environ.get('CLIENT_SECRET', '')
         account_id = metadata["accountId"]
         start_date = metadata["startDate"]
         stream_name = metadata["streamName"]

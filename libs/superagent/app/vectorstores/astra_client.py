@@ -1,3 +1,7 @@
+"""
+astra_client.py - Auto-documented by GitOps Agent
+"""
+
 # flake8: noqa
 
 import json
@@ -37,7 +41,7 @@ class AstraClient:
         collection_name: str,
     ):
         self.astra_id = astra_id
-        self.astra_application_token = token
+self.astra_application_token = os.environ.get('SELF.ASTRA_APPLICATION_TOKEN', '')
         self.astra_region = region
         self.keyspace_name = keyspace_name
         self.collection_name = collection_name

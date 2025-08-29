@@ -1,3 +1,7 @@
+"""
+data_transformer.py - Auto-documented by GitOps Agent
+"""
+
 import json
 import logging
 

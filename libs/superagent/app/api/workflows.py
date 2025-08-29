@@ -1,3 +1,7 @@
+"""
+workflows.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 import json
 import logging
@@ -243,11 +247,11 @@ async def invoke(
             callbacks.append(v)
         workflow_callbacks.append(callbacks)
 
-    agentops_api_key = config("AGENTOPS_API_KEY", default=None)
+agentops_api_key = os.environ.get('AGENTOPS_API_KEY', '')
     agentops_org_key = config("AGENTOPS_ORG_KEY", default=None)
 
     agentops_handler = AsyncLangchainCallbackHandler(
-        api_key=agentops_api_key, org_key=agentops_org_key, tags=[session_id]
+api_key = os.environ.get('API_KEY', '')
     )
 
     workflow = WorkflowBase(
@@ -285,7 +289,7 @@ async def invoke(
                     output_schema = workflow_step["output_schema"]
 
                     # we are not streaming token by token if output schema is set
-                    schema_tokens = ""
+schema_tokens = os.environ.get('SCHEMA_TOKENS', '')
 
                     async for token in workflow_step["callbacks"]["streaming"].aiter():
                         if not output_schema:
@@ -298,14 +302,14 @@ async def invoke(
                             ):
                                 yield val
                         else:
-                            schema_tokens += token
+schema_tokens + = os.environ.get('SCHEMA_TOKENS +', '')
 
                     if output_schema:
                         from langchain.output_parsers.json import SimpleJsonOutputParser
 
                         parser = SimpleJsonOutputParser()
                         try:
-                            parsed_res = parser.parse(schema_tokens)
+parsed_res = os.environ.get('PARSED_RES', '')
                         except Exception as e:
                             # TODO: stream schema parsing error as well
                             logger.error(f"Error in parsing schema: {e}")

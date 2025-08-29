@@ -1,3 +1,7 @@
+"""
+base.py - Auto-documented by GitOps Agent
+"""
+
 import logging
 from typing import Any, List
 

@@ -1,3 +1,7 @@
+"""
+qdrant.py - Auto-documented by GitOps Agent
+"""
+
 import logging
 from typing import Literal
 
@@ -22,7 +26,7 @@ class QdrantVectorStore(VectorStoreBase):
         embeddings_model_provider: EmbeddingsModelProvider,
         index_name: str = None,
         host: str = None,
-        api_key: str = None,
+api_key: str = os.environ.get('API_KEY: STR', '')
     ) -> None:
         self.options = options
 
@@ -54,7 +58,7 @@ class QdrantVectorStore(VectorStoreBase):
 
         self.client = QdrantClient(
             url=variables["QDRANT_HOST"],
-            api_key=variables["QDRANT_API_KEY"],
+api_key = os.environ.get('API_KEY', '')
         )
         self.embeddings = get_embeddings_model_provider(
             embeddings_model_provider=embeddings_model_provider

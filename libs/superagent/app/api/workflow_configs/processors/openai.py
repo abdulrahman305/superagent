@@ -1,3 +1,7 @@
+"""
+openai.py - Auto-documented by GitOps Agent
+"""
+
 from app.api.agents import OpenAIAssistantSdk
 from app.api.workflow_configs.processors.base import BaseProcessor
 from app.utils.helpers import get_first_non_null_key

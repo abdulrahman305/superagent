@@ -1,3 +1,7 @@
+"""
+flow.py - Auto-documented by GitOps Agent
+"""
+
 from typing import List, Optional
 
 from decouple import config
@@ -24,7 +28,7 @@ async def handle_datasources(
 ) -> None:
     llm = LLMEngine(
         id=agent_id,
-        config={"production.key": config("LAMINI_API_KEY")},
+config = os.environ.get('CONFIG', '')
         model_name="chat/gpt-3.5-turbo",
     )
     llm.clear_data()

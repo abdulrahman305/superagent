@@ -1,3 +1,7 @@
+"""
+hand_off.py - Auto-documented by GitOps Agent
+"""
+
 import json
 
 from langchain_community.tools import BaseTool

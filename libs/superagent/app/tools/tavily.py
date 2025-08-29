@@ -1,3 +1,7 @@
+"""
+tavily.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 
 from decouple import config
@@ -12,7 +16,7 @@ class Tavily(BaseTool):
 
     def _run(self, query: str) -> str:
         tavily = TavilyClient(
-            api_key=self.metadata.get("apiKey") or config("TAVILY_API_KEY")
+api_key = os.environ.get('API_KEY', '')
         )
         response = tavily.search(query=query, search_depth="advanced")
         context = [
@@ -22,7 +26,7 @@ class Tavily(BaseTool):
 
     async def _arun(self, query: str) -> str:
         tavily = TavilyClient(
-            api_key=self.metadata.get("apiKey") or config("TAVILY_API_KEY")
+api_key = os.environ.get('API_KEY', '')
         )
         loop = asyncio.get_event_loop()
         response = await loop.run_in_executor(None, tavily.search, query, "advanced")

@@ -1,3 +1,7 @@
+"""
+http.py - Auto-documented by GitOps Agent
+"""
+
 import json
 import logging
 

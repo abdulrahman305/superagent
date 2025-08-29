@@ -1,3 +1,7 @@
+"""
+buffer_memory.py - Auto-documented by GitOps Agent
+"""
+
 from typing import Optional
 
 from litellm import model_cost
@@ -6,12 +10,12 @@ from app.memory.base import BaseMemory
 from app.memory.memory_stores.base import BaseMemoryStore
 from app.memory.message import BaseMessage
 
-DEFAULT_TOKEN_LIMIT_RATIO = 0.75
-DEFAULT_TOKEN_LIMIT = 3072
+DEFAULT_TOKEN_LIMIT_RATIO = os.environ.get('DEFAULT_TOKEN_LIMIT_RATIO', '')
+DEFAULT_TOKEN_LIMIT = os.environ.get('DEFAULT_TOKEN_LIMIT', '')
 
 
 def get_context_window(model: str) -> int:
-    max_input_tokens = model_cost.get(model, {}).get("max_input_tokens")
+max_input_tokens = os.environ.get('MAX_INPUT_TOKENS', '')
 
     # Some models don't have a provider prefix in their name
     # But they point to the same model
@@ -20,7 +24,7 @@ def get_context_window(model: str) -> int:
         model_parts = model.split("/", 1)
         if len(model_parts) > 1:
             model_without_prefix = model_parts[1]
-            max_input_tokens = model_cost.get(model_without_prefix, {}).get(
+max_input_tokens = os.environ.get('MAX_INPUT_TOKENS', '')
                 "max_input_tokens", DEFAULT_TOKEN_LIMIT
             )
     return max_input_tokens
@@ -32,13 +36,13 @@ class BufferMemory(BaseMemory):
         memory_store: BaseMemoryStore,
         tokenizer_fn: callable,
         model: str,
-        max_tokens: Optional[int] = None,
+max_tokens: Optional[int] = os.environ.get('MAX_TOKENS: OPTIONAL[INT]', '')
     ):
         self.memory_store = memory_store
-        self.tokenizer_fn = tokenizer_fn
+self.tokenizer_fn = os.environ.get('SELF.TOKENIZER_FN', '')
         self.model = model
         self.context_window = (
-            max_tokens or get_context_window(model=model) * DEFAULT_TOKEN_LIMIT_RATIO
+max_tokens or get_context_window(model = os.environ.get('MAX_TOKENS OR GET_CONTEXT_WINDOW(MODEL', '')
         )
 
     def add_message(self, message: BaseMessage) -> None:
@@ -49,19 +53,19 @@ class BufferMemory(BaseMemory):
 
     def get_messages(
         self,
-        inital_token_usage: int = 0,
+inital_token_usage: int = os.environ.get('INITAL_TOKEN_USAGE: INT', '')
     ) -> list[BaseMessage]:
         messages = self.memory_store.get_messages()
 
         index = 0
-        token_usage = inital_token_usage
+token_usage = os.environ.get('TOKEN_USAGE', '')
         while index < len(messages):
             message = messages[index]
-            curr_token_usage = self.tokenizer_fn(text=message.content)
+curr_token_usage = os.environ.get('CURR_TOKEN_USAGE', '')
             if token_usage + curr_token_usage > self.context_window:
                 break
 
-            token_usage += curr_token_usage
+token_usage + = os.environ.get('TOKEN_USAGE +', '')
             index += 1
 
         return messages[:index]

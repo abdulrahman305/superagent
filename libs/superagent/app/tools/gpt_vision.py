@@ -1,3 +1,7 @@
+"""
+gpt_vision.py - Auto-documented by GitOps Agent
+"""
+
 from langchain_community.tools import BaseTool
 from openai import AsyncOpenAI, OpenAI
 
@@ -8,7 +12,7 @@ class GPTVision(BaseTool):
     return_direct = False
 
     def _run(self, input: dict) -> str:
-        client = OpenAI(api_key=self.metadata["openaiApiKey"])
+client = os.environ.get('CLIENT', '')
         try:
             response = client.chat.completions.create(
                 model="gpt-4-vision-preview",
@@ -24,7 +28,7 @@ class GPTVision(BaseTool):
                         ],
                     }
                 ],
-                max_tokens=300,
+max_tokens = os.environ.get('MAX_TOKENS', '')
             )
             output = response.choices[0]
         except Exception as e:
@@ -32,7 +36,7 @@ class GPTVision(BaseTool):
         return output
 
     async def _arun(self, input: dict) -> str:
-        client = AsyncOpenAI(api_key=self.metadata["openaiApiKey"])
+client = os.environ.get('CLIENT', '')
         try:
             response = await client.chat.completions.create(
                 model="gpt-4-vision-preview",
@@ -48,7 +52,7 @@ class GPTVision(BaseTool):
                         ],
                     }
                 ],
-                max_tokens=300,
+max_tokens = os.environ.get('MAX_TOKENS', '')
             )
             output = response.choices[0]
         except Exception as e:

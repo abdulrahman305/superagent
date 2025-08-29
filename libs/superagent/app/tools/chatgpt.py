@@ -1,3 +1,7 @@
+"""
+chatgpt.py - Auto-documented by GitOps Agent
+"""
+
 from typing import Any
 
 from langchain_community.tools import AIPluginTool

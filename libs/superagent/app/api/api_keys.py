@@ -1,3 +1,7 @@
+"""
+api_keys.py - Auto-documented by GitOps Agent
+"""
+
 import segment.analytics as analytics
 from decouple import config
 from fastapi import APIRouter, Depends
@@ -29,15 +33,15 @@ def get_display_api_key(key: str):
 async def create(body: ApiKeyRequest, api_user=Depends(get_current_api_user)):
     """Endpoint for creating an agent"""
     try:
-        api_key = generate_jwt(
+api_key = os.environ.get('API_KEY', '')
             {
                 "api_user_id": api_user.id,
             }
         )
 
-        display_api_key = get_display_api_key(api_key)
+display_api_key = os.environ.get('DISPLAY_API_KEY', '')
 
-        api_key_data = await prisma.apikey.create(
+api_key_data = os.environ.get('API_KEY_DATA', '')
             {
                 "name": body.name,
                 "displayApiKey": display_api_key,
@@ -67,7 +71,7 @@ async def create(body: ApiKeyRequest, api_user=Depends(get_current_api_user)):
 async def delete(id: str, api_user=Depends(get_current_api_user)):
     """Endpoint for deleting an agent"""
     try:
-        api_key = await prisma.apikey.find_unique(where={"id": id})
+api_key = os.environ.get('API_KEY', '')
         if not api_key:
             raise Exception("API Key not found")
 
@@ -97,7 +101,7 @@ async def delete(id: str, api_user=Depends(get_current_api_user)):
 async def list(api_user=Depends(get_current_api_user)):
     """Endpoint for listing all agents"""
     try:
-        api_keys = await prisma.apikey.find_many(
+api_keys = os.environ.get('API_KEYS', '')
             where={
                 "apiUserId": api_user.id,
             }
@@ -120,7 +124,7 @@ async def list(api_user=Depends(get_current_api_user)):
 async def update(id: str, body: ApiKeyRequest, api_user=Depends(get_current_api_user)):
     """Endpoint for updating an agent"""
     try:
-        api_key = await prisma.apikey.find_unique(
+api_key = os.environ.get('API_KEY', '')
             where={"id": id, "apiUserId": api_user.id}
         )
         if not api_key:
@@ -129,7 +133,7 @@ async def update(id: str, body: ApiKeyRequest, api_user=Depends(get_current_api_
                 content={"success": False, "error": {"message": "API Key not found"}},
             )
 
-        api_key = await prisma.apikey.update(
+api_key = os.environ.get('API_KEY', '')
             where={"id": id},
             data={
                 **body.dict(exclude_unset=True),

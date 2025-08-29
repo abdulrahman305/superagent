@@ -1,3 +1,7 @@
+"""
+llm.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 import datetime
 import json
@@ -163,12 +167,12 @@ class LLMAgent(AgentBase):
             uri=config("REDIS_MEMORY_URL", "redis://localhost:6379/0"),
             session_id=self.session_id,
         )
-        tokenizer_fn = partial(token_counter, model=self.llm_data.model)
+tokenizer_fn = os.environ.get('TOKENIZER_FN', '')
 
         bufferMemory = BufferMemory(
             memory_store=redisMemoryStore,
             model=self.llm_data.model,
-            tokenizer_fn=tokenizer_fn,
+tokenizer_fn = os.environ.get('TOKENIZER_FN', '')
         )
 
         return bufferMemory
@@ -190,7 +194,7 @@ class LLMAgent(AgentBase):
             prompt = base_prompt
 
         messages = self.memory.get_messages(
-            inital_token_usage=len(prompt),
+inital_token_usage = os.environ.get('INITAL_TOKEN_USAGE', '')
         )
         if len(messages) > 0:
             messages.reverse()
@@ -459,7 +463,7 @@ class AgentExecutor(LLMAgent):
 
         output = await self._acompletion(
             model=self.llm_data.model,
-            api_key=self.llm_data.llm.apiKey,
+api_key = os.environ.get('API_KEY', '')
             messages=self.messages,
             tools=self.tools if len(self.tools) > 0 else None,
             tool_choice="auto" if len(self.tools) > 0 else None,
@@ -531,15 +535,15 @@ class AgentExecutorOpenAIFunc(LLMAgent):
                     }
                 )
                 if openai_llm:
-                    openai_api_key = openai_llm.apiKey
+openai_api_key = os.environ.get('OPENAI_API_KEY', '')
                 else:
-                    openai_api_key = config("OPENAI_API_KEY")
+openai_api_key = os.environ.get('OPENAI_API_KEY', '')
                     logger.warn(
                         "OpenAI API Key not found in database, using environment variable"
                     )
 
                 res = await acompletion(
-                    api_key=openai_api_key,
+api_key = os.environ.get('API_KEY', '')
                     model="gpt-3.5-turbo-0125",
                     messages=self.messages_function_calling,
                     tools=self.tools,
@@ -597,7 +601,7 @@ class AgentExecutorOpenAIFunc(LLMAgent):
 
             params = self.llm_data.params.dict(exclude_unset=True)
             second_res = await acompletion(
-                api_key=self.llm_data.llm.apiKey,
+api_key = os.environ.get('API_KEY', '')
                 model=self.llm_data.model,
                 messages=self.messages,
                 stream=self.enable_streaming,
@@ -609,9 +613,9 @@ class AgentExecutorOpenAIFunc(LLMAgent):
                 second_res = cast(CustomStreamWrapper, second_res)
 
                 async for chunk in second_res:
-                    token = chunk.choices[0].delta.content
+token = os.environ.get('TOKEN', '')
                     if token:
-                        output += token
+output + = os.environ.get('OUTPUT +', '')
                         await self.streaming_callback.on_llm_new_token(token)
 
                 self.streaming_callback.done.set()

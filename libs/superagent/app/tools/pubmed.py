@@ -1,3 +1,7 @@
+"""
+pubmed.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 
 from langchain_community.tools import BaseTool, PubmedQueryRun

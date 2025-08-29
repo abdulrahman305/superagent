@@ -1,3 +1,7 @@
+"""
+scraper.py - Auto-documented by GitOps Agent
+"""
+
 import asyncio
 
 from langchain_community.tools import BaseTool
@@ -10,7 +14,7 @@ class Scraper(BaseTool):
     return_direct = False
 
     def _run(self, url: str) -> str:
-        client = ScrapingBeeClient(api_key=self.metadata.get("apiKey"))
+client = os.environ.get('CLIENT', '')
         response = client.get(
             url,
             params={

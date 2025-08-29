@@ -1,3 +1,7 @@
+"""
+api_agent_manager.py - Auto-documented by GitOps Agent
+"""
+
 import logging
 
 from app.api.agents import (

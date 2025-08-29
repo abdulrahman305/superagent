@@ -1,3 +1,7 @@
+"""
+base.py - Auto-documented by GitOps Agent
+"""
+
 from abc import ABC, abstractmethod
 from typing import List
 

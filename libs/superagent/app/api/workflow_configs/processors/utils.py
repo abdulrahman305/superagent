@@ -1,3 +1,7 @@
+"""
+utils.py - Auto-documented by GitOps Agent
+"""
+
 from prisma.enums import AgentType
 
 

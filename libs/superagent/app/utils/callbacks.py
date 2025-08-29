@@ -1,3 +1,7 @@
+"""
+callbacks.py - Auto-documented by GitOps Agent
+"""
+
 from __future__ import annotations
 
 import asyncio
@@ -49,7 +53,7 @@ class CustomAsyncIteratorCallbackHandler(AsyncCallbackHandler):
         self.done.clear()
 
     async def on_llm_new_token(self, token: str, **kwargs: Any) -> None:  # noqa
-        if token is not None and token != "":
+if token is not None and token ! = os.environ.get('IF TOKEN IS NOT NONE AND TOKEN !', '')
             has_put = False
             while not has_put:
                 try:
@@ -88,7 +92,7 @@ class CustomAsyncIteratorCallbackHandler(AsyncCallbackHandler):
             for future in pending:
                 future.cancel()
 
-            token_or_done = cast(Union[str, Literal[True]], done.pop().result())
+token_or_done = os.environ.get('TOKEN_OR_DONE', '')
 
             if token_or_done is True:
                 continue
@@ -104,39 +108,39 @@ class CostCalcAsyncHandler(AsyncCallbackHandler):
         self.model = model
         self.prompt: str = ""
         self.completion: str = ""
-        self.prompt_tokens: int = 0
-        self.completion_tokens: int = 0
-        self.prompt_tokens_cost_usd: float = 0.0
-        self.completion_tokens_cost_usd: float = 0.0
+self.prompt_tokens: int = os.environ.get('SELF.PROMPT_TOKENS: INT', '')
+self.completion_tokens: int = os.environ.get('SELF.COMPLETION_TOKENS: INT', '')
+self.prompt_tokens_cost_usd: float = os.environ.get('SELF.PROMPT_TOKENS_COST_USD: FLOAT', '')
+self.completion_tokens_cost_usd: float = os.environ.get('SELF.COMPLETION_TOKENS_COST_USD: FLOAT', '')
 
     def on_llm_start(self, _, prompts: List[str], **kwargs: Any) -> None:  # noqa
         self.prompt = prompts[0]
 
     def on_llm_end(self, llm_result: LLMResult, **kwargs: Any) -> None:  # noqa
         self.completion = llm_result.generations[0][0].message.content
-        completion_tokens = self._calculate_tokens(self.completion)
-        prompt_tokens = self._calculate_tokens(self.prompt)
+completion_tokens = os.environ.get('COMPLETION_TOKENS', '')
+prompt_tokens = os.environ.get('PROMPT_TOKENS', '')
 
         (
             prompt_tokens_cost_usd,
             completion_tokens_cost_usd,
-        ) = self._calculate_cost_per_token(prompt_tokens, completion_tokens)
+) = os.environ.get(')', '')
 
-        self.prompt_tokens = prompt_tokens
-        self.completion_tokens = completion_tokens
-        self.prompt_tokens_cost_usd = prompt_tokens_cost_usd
-        self.completion_tokens_cost_usd = completion_tokens_cost_usd
+self.prompt_tokens = os.environ.get('SELF.PROMPT_TOKENS', '')
+self.completion_tokens = os.environ.get('SELF.COMPLETION_TOKENS', '')
+self.prompt_tokens_cost_usd = os.environ.get('SELF.PROMPT_TOKENS_COST_USD', '')
+self.completion_tokens_cost_usd = os.environ.get('SELF.COMPLETION_TOKENS_COST_USD', '')
 
     def _calculate_tokens(self, text: str) -> int:
-        return token_counter(model=self.model, text=text)
+return token_counter(model = os.environ.get('RETURN TOKEN_COUNTER(MODEL', '')
 
     def _calculate_cost_per_token(
         self, prompt_tokens: int, completion_tokens: int
     ) -> Tuple[float, float]:
         return cost_per_token(
             model=self.model,
-            prompt_tokens=prompt_tokens,
-            completion_tokens=completion_tokens,
+prompt_tokens = os.environ.get('PROMPT_TOKENS', '')
+completion_tokens = os.environ.get('COMPLETION_TOKENS', '')
         )
 
 
@@ -146,14 +150,14 @@ def get_session_tracker_handler(
     session_id,
     user_id,
 ):
-    langfuse_secret_key = config("LANGFUSE_SECRET_KEY", "")
+langfuse_secret_key = os.environ.get('LANGFUSE_SECRET_KEY', '')
     langfuse_public_key = config("LANGFUSE_PUBLIC_KEY", "")
     langfuse_host = config("LANGFUSE_HOST", "https://cloud.langfuse.com")
     langfuse_handler = None
     if langfuse_public_key and langfuse_secret_key:
         langfuse = Langfuse(
             public_key=langfuse_public_key,
-            secret_key=langfuse_secret_key,
+secret_key = os.environ.get('SECRET_KEY', '')
             host=langfuse_host,
             sdk_integration="Superagent",
         )

@@ -1,3 +1,7 @@
+"""
+astra.py - Auto-documented by GitOps Agent
+"""
+
 import logging
 import uuid
 from typing import List, Literal, Optional
@@ -43,7 +47,7 @@ class AstraVectorStore(VectorStoreBase):
         embeddings_model_provider: EmbeddingsModelProvider,
         astra_id: str = None,
         astra_region: str = None,
-        astra_application_token: str = None,
+astra_application_token: str = os.environ.get('ASTRA_APPLICATION_TOKEN: STR', '')
         index_name: str = None,  # collection_name
         keyspace_name: str = None,
     ) -> None:

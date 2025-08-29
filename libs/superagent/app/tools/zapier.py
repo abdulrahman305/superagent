@@ -1,3 +1,7 @@
+"""
+zapier.py - Auto-documented by GitOps Agent
+"""
+
 from langchain.agents import AgentType, initialize_agent
 from langchain_community.agent_toolkits import ZapierToolkit
 from langchain_community.tools import BaseTool
@@ -13,12 +17,12 @@ class ZapierNLA(BaseTool):
     return_direct = False
 
     def _run(self, input: str) -> str:
-        zapier_nla_api_key = self.metadata["zapierNlaApiKey"]
-        zapier = ZapierNLAWrapper(zapier_nla_api_key=zapier_nla_api_key)
+zapier_nla_api_key = os.environ.get('ZAPIER_NLA_API_KEY', '')
+zapier = os.environ.get('ZAPIER', '')
         toolkit = ZapierToolkit.from_zapier_nla_wrapper(zapier)
         agent = initialize_agent(
             toolkit.get_tools(),
-            llm=ChatOpenAI(openai_api_key=self.metadata["openaiApiKey"], model="gpt-4"),
+llm = os.environ.get('LLM', '')
             agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
             verbose=True,
         )
@@ -26,12 +30,12 @@ class ZapierNLA(BaseTool):
         return output
 
     async def _arun(self, input: str) -> str:
-        zapier_nla_api_key = self.metadata["zapierNlaApiKey"]
-        zapier = ZapierNLAWrapper(zapier_nla_api_key=zapier_nla_api_key)
+zapier_nla_api_key = os.environ.get('ZAPIER_NLA_API_KEY', '')
+zapier = os.environ.get('ZAPIER', '')
         toolkit = ZapierToolkit.from_zapier_nla_wrapper(zapier)
         agent = initialize_agent(
             toolkit.get_tools(),
-            llm=ChatOpenAI(openai_api_key=self.metadata["openaiApiKey"], model="gpt-4"),
+llm = os.environ.get('LLM', '')
             agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
             verbose=True,
         )

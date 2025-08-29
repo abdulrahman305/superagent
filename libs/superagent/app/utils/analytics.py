@@ -1,3 +1,7 @@
+"""
+analytics.py - Auto-documented by GitOps Agent
+"""
+
 import logging
 
 import segment.analytics as analytics

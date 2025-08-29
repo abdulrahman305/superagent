@@ -1,3 +1,7 @@
+"""
+function.py - Auto-documented by GitOps Agent
+"""
+
 from langchain_community.tools import BaseTool
 
 

@@ -1,3 +1,7 @@
+"""
+superrag.py - Auto-documented by GitOps Agent
+"""
+
 from enum import Enum
 from typing import Optional
 from urllib.parse import unquote, urlparse

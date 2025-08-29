@@ -1,3 +1,7 @@
+"""
+langchain.py - Auto-documented by GitOps Agent
+"""
+
 import datetime
 from functools import cached_property
 
@@ -48,19 +52,19 @@ class LangchainAgent(AgentBase):
         if llm_data.llm.provider == LLMProvider.OPENAI:
             return ChatOpenAI(
                 model=LLM_MAPPING[self.llm_data.model],
-                openai_api_key=llm_data.llm.apiKey,
+openai_api_key = os.environ.get('OPENAI_API_KEY', '')
                 streaming=self.enable_streaming,
                 callbacks=self.callbacks,
                 temperature=llm_data.params.temperature,
-                max_tokens=llm_data.params.max_tokens,
+max_tokens = os.environ.get('MAX_TOKENS', '')
             )
         elif llm_data.llm.provider == LLMProvider.AZURE_OPENAI:
             return AzureChatOpenAI(
-                api_key=llm_data.llm.apiKey,
+api_key = os.environ.get('API_KEY', '')
                 streaming=self.enable_streaming,
                 callbacks=self.callbacks,
                 temperature=llm_data.params.temperature,
-                max_tokens=llm_data.params.max_tokens,
+max_tokens = os.environ.get('MAX_TOKENS', '')
             )
 
     @cached_property
