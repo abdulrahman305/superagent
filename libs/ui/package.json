@@ -57,7 +57,7 @@
     "cmdk": "^0.2.0",
     "dayjs": "^1.11.9",
     "framer-motion": "^10.16.4",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.1.1",
     "langfuse": "^1.0.31",
     "lucide-react": "0.105.0-alpha.4",
     "monaco-yaml": "^5.1.1",
